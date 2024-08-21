@@ -1,11 +1,12 @@
 <?php
 
+use App\Models\Message;
+use App\Jobs\SendMessageJob;
+use Payment\Facades\Payment;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
-use App\Jobs\SendMessageJob;
-use App\Models\Message;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 
 Route::get('/', function () {
@@ -63,6 +64,11 @@ Route::get('/send', function (){
     // }   
 
     return "All messages have been sent";
+});
+
+
+Route::get('payment', function (){
+    Payment::driver('stripe')->refund(123);
 });
 
 require __DIR__.'/auth.php';
