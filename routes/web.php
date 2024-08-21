@@ -59,10 +59,6 @@ Route::get('/send', function (){
     Message::where('status','pending')->chunk(1000,function ($messages) {
         dispatch(new SendMessageJob($messages));
     });
-    // foreach($messages as $message) 
-    // {
-    // }   
-
     return "All messages have been sent";
 });
 
