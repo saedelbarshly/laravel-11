@@ -62,6 +62,10 @@ Route::get('/send', function (){
     return "All messages have been sent";
 });
 
+Route::get('/upload',function (){
+    return view('Upload.index');
+})->middleware('auth');
+
 
 Route::get('payment', function (){
     Payment::driver('stripe')->refund(123);
