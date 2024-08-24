@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\UploadLargFileController;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 
 Route::get('/', function () {
@@ -66,6 +67,7 @@ Route::get('/upload',function (){
     return view('Upload.index');
 })->middleware('auth');
 
+Route::post('/upload',[UploadLargFileController::class,'store'])->name('upload.larg.file');
 
 Route::get('payment', function (){
     Payment::driver('stripe')->refund(123);
