@@ -68,6 +68,7 @@ Route::get('/upload',function (){
 })->middleware('auth');
 
 Route::post('/upload',[UploadLargFileController::class,'store'])->name('upload.larg.file');
+Route::get('/batch',[UploadLargFileController::class,'batch']);
 
 Route::get('payment', function (){
     Payment::driver('stripe')->refund(123);
