@@ -40,6 +40,8 @@ return [
 
             // Logs every incoming GraphQL query.
             // Nuwave\Lighthouse\Http\Middleware\LogGraphQLQueries::class,
+
+            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
         ],
 
         /*
@@ -48,6 +50,7 @@ return [
         // 'prefix' => '',
         // 'domain' => '',
         // 'where' => [],
+
     ],
 
     /*
@@ -61,7 +64,7 @@ return [
     |
     */
 
-    'guards' => null,
+    'guards' => 'sanctum',
 
     /*
     |--------------------------------------------------------------------------
