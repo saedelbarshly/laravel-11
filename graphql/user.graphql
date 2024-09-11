@@ -1,13 +1,13 @@
 "A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`."
 scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+scalar Upload @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Upload")
 
 "Indicates what fields are available at the top level of a query operation."
-extendgraphql type Query {
+extend type Query {
     "Find a single user by an identifying attribute."
     user(
       "Search by primary key."
       id: ID @eq @rules(apply: ["prohibits:email", "required_without:email"])
-
       "Search by email address."
       email: String @eq @rules(apply: ["prohibits:id", "required_without:id", "email"])
     ): User @find
@@ -18,13 +18,16 @@ extendgraphql type Query {
       name: String @where(operator: "like")
     ): [User!]! @paginate(defaultCount: 10)
 
+}
 
+extend Mutation {
+  updateUserAvatar(avater: Upload!) : String
 }
 
 
 
 "Account of a person who utilizes this application."
-type User {
+extend type User {
     "Unique primary key."
     id: ID!
 
@@ -42,5 +45,7 @@ type User {
 
     "When the account was last updated."
     updated_at: DateTime!
+
+    avater: String
 }
 

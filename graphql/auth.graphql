@@ -3,5 +3,5 @@ extend type Mutation {
 }
 
 extend type Query {
-    me: User! @guard
+    me: User! @auth @guard
 }
