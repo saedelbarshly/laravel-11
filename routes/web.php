@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\PaypalController;
 use App\Http\Controllers\UploadLargFileController;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 
@@ -72,6 +73,13 @@ Route::get('/batch',[UploadLargFileController::class,'batch']);
 
 Route::get('payment', function (){
     Payment::driver('stripe')->refund(123);
+});
+
+
+Route::controller(PaypalController::class)->group(function (){
+    Route::get('/paypal', 'paypal');
+    Route::get('/success', 'success')->name('paypal.success');
+    Route::get('/cancel', 'cancel')->name('paypal.cancel');
 });
 
 require __DIR__.'/auth.php';
