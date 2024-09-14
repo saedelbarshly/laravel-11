@@ -56,4 +56,10 @@ class User extends Authenticatable
     {
         return $this->hasOneThrough(Country::class, Profile::class);
     }
+
+
+    public function tenant(): HasOne
+    {
+        return $this->hasOne(Tenant::class);
+    }
 }
