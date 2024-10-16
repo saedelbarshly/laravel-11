@@ -51,7 +51,7 @@ class CategoryMainTest extends TestCase
         $categories = Category::factory()->count(2)->create();
         $response = $this->get('/category/index');
         $response->assertStatus(200);
-        $data = $response->json();
+        $data = $response->json(        );
         $this->assertEquals(2,count($data));
         foreach($categories as $key => $category)
         {
